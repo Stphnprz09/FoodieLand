@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    position: relative;
+    width: calc(100%/ 12 * 12);
+    box-sizing: border-box;
+    padding-top: 10%;
+    font-family: 'Inter', sans-serif;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+.form-section {
+    position: relative;
+    width: calc(100%/12 * 10);
+    box-sizing: border-box;
+    margin: 0 auto 0 auto;
+}
+
+.image {
+    width: calc(100%/ 12 * 6);
+    box-sizing: border-box;
+}
+
+.image img {
+    display: block;
+    width: calc(100%/12 * 12);
+    box-sizing: border-box;
+    height: 70vh;
+}
+
+
+.form {
+    position: relative;
+    width: calc(100%/12 * 5);
+    box-sizing: border-box;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    margin: 3% 0 0 3%;
+    border: solid 1px silver;
+    border-radius: 5px;
+}
+
+.form .inputs {
+    position: relative;
+    width: calc(100%/ 12 * 12);
+}
+
+.form .inputs input {
+    position: relative;
+    width: calc(100%/ 12 * 9.5);
+    padding: 4.5%;
+    border: none;
+    outline: 0;
+    font-size: 2ex;
+}
+
+.form i {
+    padding: 0.5%;
+    font-size: 3ex;
+    margin: 2% 0 0 2%;
+}
+
+.form .inputs .underline {
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    width: calc(100%/12 * 12);
+    background: silver;
+}
+
+span.error-msg {
+    color: #FF0000;
+}
+
+.other-buttons {
+    margin-top: 3rem;
+    margin-left: 0.5rem;
+}
+
+.login-button {
+    padding: 1rem 3rem;
+    border-radius: 10px;
+    background: #000000;
+    color: #FFFFFF;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+
+/* footer */
+
+footer {
+    margin: 10rem 0 0 4rem;
+    width: 90%;
+    height: 30vh;
+}
+
+
+.upper-footer ul li {
+    display: inline-block;
+    padding: 0 1rem;
+    font-size: 19px;
+}
+
+.upper-footer {
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.upper-footer ul {
+    float: right;
+    line-height: 80px;
+}
+
+.upper-footer a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.upper-footer label {
+    line-height: 80px;
+    font-family: 'Lobster', sans-serif;
+    font-size: 24px;
+}
+
+.lower-footer span {
+    line-height: 80px;
+    margin-left: 30rem;
+    font-size: 18px;
+}
+
+.lower-footer ul li {
+    display: inline-block;
+    padding: 0 1rem;
+    line-height: 80px;
+}
+
+.lower-footer a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.lower-footer ul {
+    float: right;
+}

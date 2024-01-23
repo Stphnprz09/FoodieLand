@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/addRecipe.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='css/FoodieLand..png')}}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css
+    " integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>FoodieLand | Add Recipe</title>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <label class="logo">FoodieLand</label>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Recipes</a></li>
+                <li><a href="{{ url_for('blogList') }}">Blog</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About Us</a></li>
+                <div class="nav-icon">
+                    <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                </div>
+            </ul>
+        </nav>
+        <!-- navigation -->
+        
+        <header>
+            <!-- header -->
+            <h2>Create new recipe</h2>
+            <button value="button">Save</button>
+        </header>
+
+        <!-- add recipe -->
+        <div class="addRecipe">
+            <!-- recipe title -->
+            <label>Recipe Title</label><br>
+            <input type="text" name="recipeTitle" placeholder="Add Title" class="title" required><br>
+
+            <!-- recipe image and preview -->
+            <label>Recipe Image</label><br>
+            <img id="imagePreview" alt="imgPreview" width="100px" height="80px" src="{{ url_for('static', filename='img/imgRecipe.png') }}"><br>
+            <div class="fileContainer">
+                <input type="file" name="addImage" id="addImage" name="image" accept="image/*" onchange="previewImage(event)"><br>
+                <img src="{{ url_for('static', filename='img/imgLogo.jpg') }}" alt="imgLogo" id="browseButton" onclick="browseButton()">
+            </div>
+
+            <!-- description -->
+            <label>Description: </label><br>
+            <input type="text" name="desc" id="desc" maxlength="100" required oninput="characterCount()" placeholder="Add Description"><br>
+            <span id="charCount">100/100</span><br>
+            
+            <!-- ingredients -->
+            <label for="ingredients">Ingredients:</label><br>
+            <div id="ingredientContainer">
+                <input type="text" name="ingredients" id="ingredients" placeholder="Add ingredients" maxlength="100"><br>
+            </div>
+            <span id="addIngredients" onclick="addIngredient()" style="cursor: pointer;">+ Add Ingredient</span><br><br>
+
+            <!-- Instruction -->
+            <label for="instruction">Instructions</label><br>
+            <!-- <span id="tapToEdit">Tap to edit</span><br> -->
+            <span id="stepsInstruction">Step 1:</span>
+            <div class="instructionContainer">
+                <input type="text" name="instructions" id="instructions" placeholder="Add Instruction">
+            </div>
+            <span id="addInstruction" onclick="addInstruction()">+ Add Instruction</span><br><br>
+
+            <!-- Servings -->
+            <label for="servings">Servings: </label><br>
+            <input type="number" name="numServing" id="numServing" required placeholder="#">
+            <span class="serv1">how many does this recipe make?</span><br><br>
+
+            <!-- Cooking Time -->
+            <label for="cookingTime">Cooking Time: </label>
+            <div class="cookingTimeContainer">
+                <input type="number" name="hours" id="hours" placeholder="Hours 0">
+                <input type="number" name="minutes" id="minutes" placeholder="Minutes 0">
+            </div>
+            <span class="cook1">How long does it take to cook this recipe?</span><br><br>
+
+            <!-- Preparation Time -->
+            <label for="prepTime">Preparation Time: </label>
+            <div class="prepTimeContainer">
+                <input type="number" name="hours" id="hours" placeholder="Hours 0">
+                <input type="number" name="minutes" id="minutes" placeholder="Minutes 0">
+            </div>
+            <span class="prep1">How long does it take to prepare this recipe?</span><br><br>
+
+            <!-- category -->
+            <label for="category">Category: </label><br>
+            <select name="category" id="category">
+                <option value="breakfast">Breakfast</option>
+                <option value="lunch">Lunch</option>
+                <option value="dinner">Dinner</option>
+                <option value="appetizer">Appetizer</option>
+                <option value="drinks">Drinks</option>
+            </select>
+        </div>
+
+        <!-- inbox -->
+        <div class="inbox-discussion">
+            <img src="{{ url_for('static', filename='img/salad1.png') }}" alt="salad1" class="salad1">
+            <img src="{{ url_for('static', filename='img/salad2.png') }}" alt="salad2" class="salad2">
+            <div class="inbox-text">
+                <h2>Deliciousness to your inbox</h2>
+                <p>Lorem ipsum dolor sit amet, consectetuipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqut
+                enim ad minim</p>
+            </div>
+            <div class="subscribeButton">
+                <input type="email" name="discussion" id="discussion" placeholder="Your email address...">
+                <input type="submit" value="Subscribe">
+            </div>
+        </div>
+
+        <!-- footer -->
+        <footer>
+            <div class="upper-footer">
+                <label for="foodieLand">FoodieLand.</label>
+                <ul>
+                    <li><a href="#">Recipes</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">About Us</a></li>
+                </ul>
+            </div>
+            <div class="lower-footer">
+                <span>&copy;2024 Group 9 - ITE1</span>
+                <ul>
+                    <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+</body>
+
+<script src="{{ url_for('static', filename='js/addRecipe.js')}}"></script>
+</html>

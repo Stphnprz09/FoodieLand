@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css
+            " integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signIn.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+    <title>FoodieLand | Sign In</title>
+</head>
+<body>
+    <!-- navigation -->
+    <nav>
+        <label class="logo">FoodieLand</label>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Recipes</a></li>
+            <li><a href="{{ url_for('blogList') }}">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">About Us</a></li>
+            <div class="nav-icon">
+                <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            </div>
+        </ul>
+    </nav>
+<!------------------SIGN UP CONTAINER------------------->
+<div class="container">
+
+    <div class="form-section">
+        <div class="row">
+
+            <div class="image">
+                <img src="{{ url_for('static', filename='img/logsign.png') }}" alt="Image">
+            </div>
+
+            <div class="form">
+                <form method="POST" action="{{ url_for('signin') }}">
+                    <!--USERNAME-->
+                    <div class="inputs">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" name="username" placeholder="Username" autocomplete="off">
+                        <div class="underline"></div>
+                    </div>
+
+                    <!--EMAIL-->
+                    <div class="inputs">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="text" name="email" placeholder="Email Address" autocomplete="off">
+                        <div class="underline"></div>
+                    </div>
+
+                    <!--PASSWORD-->
+                    <div class="inputs">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name="password" placeholder="Password" autocomplete="off">
+                        <div class="underline"></div>
+                    </div>
+
+                    <!--CONFRIM PASS-->
+                    <div class="inputs">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" name="confirm-password" placeholder="Confirm Password"
+                            autocomplete="off">
+                        <div class="underline"></div>
+                    </div>
+
+                    <div class="other-buttons">
+                        <button class="login-button">Sign In</button><br>
+
+                        <div class="signup-link">
+                            Already have an account? <a href="{{ url_for('login') }}"><b>Log in</b></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- footer -->
+<footer>
+    <div class="upper-footer">
+        <label for="foodieLand">FoodieLand.</label>
+        <ul>
+            <li><a href="#">Recipes</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">About Us</a></li>
+        </ul>
+    </div>
+    <div class="lower-footer">
+        <span>&copy;2024 Group 9 - ITE1</span>
+        <ul>
+            <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+        </ul>
+    </div>
+</footer>
+</body>
+</html>
