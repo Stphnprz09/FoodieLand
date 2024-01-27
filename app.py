@@ -36,10 +36,11 @@ def signin():
         password = request.form['password']
         
         cursor.execute("INSERT INTO user (userName, email, password) VALUES (%s, %s, %s)", (username, email, password))
-        
+    
         db_connection.commit()
-        
-    return render_template('signIn.html')
+        return redirect(url_for('login'))
+      
+    return render_template('signIn.html',sucess='You successfully created an account. Please log in')
 
 # LOG IN 
 @app.route('/login', methods=['GET', 'POST'])
