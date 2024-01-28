@@ -75,6 +75,11 @@ def logout():
 def home():
     return render_template('home.html')
 
+# contact us
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
 # ADD RECIPE
 @app.route('/addRecipe')
 def addRecipe():
