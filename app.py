@@ -1,10 +1,22 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from flask_mail import Mail
+from flask_mail import Message
 import mysql.connector
 import requests
 
 app = Flask(__name__)
 
 app.secret_key = 'your_secret_key'
+
+# Add your email configuration
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'perezstephenmathew360@gmail.com'
+app.config['MAIL_PASSWORD'] = 'iuzb rwcr plru jpow '
+app.config['MAIL_DEFAULT_SENDER'] = 'perezstephenmathew360@gmail.com'
+
+mail = Mail(app)
 
 # Configure SQL
 app.config['MYSQL_DATABASE_USER'] = 'root'
@@ -76,8 +88,23 @@ def home():
     return render_template('home.html')
 
 # contact us
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        subject = request.form['subject']
+        message = request.form['message']
+        
+        # SQL command to execute
+        cursor.execute("INSERT INTO contact (name, email, subject, message) VALUES (%s, %s, %s, %s)", (name, email, subject, message))
+        db_connection.commit()
+        
+        # command to email back 
+        msg_Feedback = Message('Thank you for your feedback!', recipients=[email])
+        msg_Feedback.body = f"Dear {name},\n\nThank you for contacting us. We appreciate your feedback.\n\nThis message is for your softcopy of your concern\n\nSubject: {subject},\n\nMessage: {message},\n\nBest regards,\nThe Group 9 - FoodieLand Team" 
+        mail.send(msg_Feedback)
+        
     return render_template('contact.html')
 
 # ADD RECIPE
