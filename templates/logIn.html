@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/logIn.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navigation.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/mainlogo.png') }}" type="image/x-icon">
     <title>FoodieLand | Log In</title>
 </head>
 <body>
@@ -47,17 +48,18 @@
                         <!--PASSWORD-->
                         <div class="inputs">
                             <i class="fa-solid fa-lock"></i>
-                            <input type="password" name="password" placeholder="Password" autocomplete="off" required>
+                            <input type="password" name="password" placeholder="Password" id="password" autocomplete="off" required>
                             <div class="underline"></div>
                         </div>
         
                         <!--CONFRIM PASS-->
                         <div class="inputs">
                             <i class="fa-solid fa-lock"></i>
-                            <input type="password" name="confirm-password" placeholder="Confirm Password" autocomplete="off" required>
+                            <input type="password" name="confirm-password" placeholder="Confirm Password" id="confirm-password" autocomplete="off" required>
                             <div class="underline"></div>
                         </div>
 
+                        <span id="password-error"></span>
                         <span class="error-msg">{{ error }}</span>
 
                         <div class="other-buttons">
@@ -74,4 +76,5 @@
         </div>
     </div>
 </body>
+<script src="{{ url_for('static', filename='js/passwordValidation.js') }}"></script>
 </html>
