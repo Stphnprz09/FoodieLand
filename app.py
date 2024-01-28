@@ -24,6 +24,8 @@ db_connection = mysql.connector.connect(
 cursor = db_connection.cursor(dictionary=True)
 
 @app.route('/')
+def landing():
+    return render_template('landingPage.html')
 
 # SIGN IN
 @app.route('/signin', methods=['GET', 'POST'])
