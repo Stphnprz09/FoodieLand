@@ -35,11 +35,16 @@ def signin():
         email = request.form['email']
         password = request.form['password']
         
-        cursor.execute("INSERT INTO user (userName, email, password) VALUES (%s, %s, %s)", (username, email, password))
-    
-        db_connection.commit()
-        return redirect(url_for('login'))
-      
+        cursor.execute("SELECT * FROM user WHERE userName = %s", (username,))
+        existing_username = cursor.fetchone()
+        
+        if existing_username:
+            return render_template('signIn.html', error='Username already exist, please try another username')
+        else:
+            cursor.execute("INSERT INTO user (userName, email, password) VALUES (%s, %s, %s)", (username, email, password))
+            db_connection.commit()
+            return redirect(url_for('login'))    
+          
     return render_template('signIn.html',sucess='You successfully created an account. Please log in')
 
 # LOG IN 

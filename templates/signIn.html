@@ -37,31 +37,34 @@
                     <!--USERNAME-->
                     <div class="inputs">
                         <i class="fa-regular fa-user"></i>
-                        <input type="text" name="username" placeholder="Username" autocomplete="off">
+                        <input type="text" name="username" placeholder="Username" autocomplete="off" required>
                         <div class="underline"></div>
                     </div>
 
                     <!--EMAIL-->
                     <div class="inputs">
                         <i class="fa-regular fa-envelope"></i>
-                        <input type="text" name="email" placeholder="Email Address" autocomplete="off">
+                        <input type="text" name="email" placeholder="Email Address" autocomplete="off" required>
                         <div class="underline"></div>
                     </div>
 
                     <!--PASSWORD-->
                     <div class="inputs">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" name="password" placeholder="Password" autocomplete="off">
+                        <input type="password" name="password" placeholder="Password" id="password" autocomplete="off" required>
                         <div class="underline"></div>
                     </div>
 
                     <!--CONFRIM PASS-->
                     <div class="inputs">
                         <i class="fa-solid fa-lock"></i>
-                        <input type="password" name="confirm-password" placeholder="Confirm Password"
-                            autocomplete="off">
+                        <input type="password" name="confirm-password" placeholder="Confirm Password" id="confirm-password"
+                            autocomplete="off" required>
                         <div class="underline"></div>
                     </div>
+
+                    <span id="password-error"></span>
+                    <span class="error-msg">{{ error }}</span>
 
                     <div class="other-buttons">
                         <button class="login-button">Sign In</button><br>
@@ -77,4 +80,5 @@
     </div>
 </div>
 </body>
+<script src="{{ url_for('static', filename='js/passwordValidation.js') }}"></script>
 </html>
