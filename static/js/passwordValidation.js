@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             passwordError.textContent = 'Password match';
             passwordError.style.color = 'green';
+            alert('You successfully created an account. Please log in');
         }
     });
 });
