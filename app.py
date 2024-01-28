@@ -24,8 +24,6 @@ db_connection = mysql.connector.connect(
 cursor = db_connection.cursor(dictionary=True)
 
 @app.route('/')
-# def home():
-#     return 'Home Page'
 
 # SIGN IN
 @app.route('/signin', methods=['GET', 'POST'])
@@ -59,7 +57,7 @@ def login():
 
         if user:
             session['email'] = email
-            return redirect(url_for('addRecipe'))
+            return redirect(url_for('home'))
         else:
             return render_template('logIn.html', error='Login failed. Please check your email and password.')
 
@@ -70,6 +68,10 @@ def login():
 def logout():
     session.clear()
     return render_template('logIn.html')
+
+@app.route('/home')
+def home():
+    return render_template('home.html')
 
 # ADD RECIPE
 @app.route('/addRecipe')
