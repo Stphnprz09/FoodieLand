@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100%;
+    height: 100vh;
+}
+
+/* navigation */
+nav {
+    width: 100%;
+    height: 80px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    background-color: #FAF9F6;
+    z-index: 1000;
+    /* display: none; */
+}
+
+span.logoDot {
+    color: #FF7426;
+}
+
+nav ul li,
+.dropClass .nav-icon {
+    display: inline-block;
+    margin: 0 1rem;
+}
+
+nav ul {
+    float: right;
+    line-height: 80px;
+    /* margin-right: 0rem; */
+}
+
+nav a {
+    text-decoration: none;
+    color: #000000;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+nav a:hover,
+button:hover {
+    color: #FF7426;
+}
+
+label.logo {
+    line-height: 80px;
+    margin: 0 2rem;
+    font-weight: bold;
+    font-size: 2em;
+    font-family: 'Lobster', sans-serif;
+    cursor: pointer;
+}
+
+/* drop down css */
+.dropClass {
+    position: relative;
+    display: inline-block;
+}
+
+
+button {
+    font-size: 1rem;
+    border: none;
+    background-color: #FAF9F6;
+    cursor: pointer;
+}
+
+.dropContent {
+    position: absolute;
+    display: none;
+    top: 100%;
+    left: 10%;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    background: #FAF9F6;
+}
+
+.dropContent a {
+    font-size: 0.9rem;
+}
+
+.dropClass:hover .dropContent {
+    display: inline-block;
+}
+
+
+
+/* icons hover */
+.nav-icon {
+    margin-left: 10rem;
+    display: inline-block;
+    position: relative;
+
+}
+
+.nav-icon li {
+    padding-right: 2rem;
+}
+
+
+.nav-icon .span1 {
+    display: none;
+    font-size: 0.8rem;
+    position: absolute;
+    top: 30%;
+    left: 9%;
+}
+
+.nav-icon .span2 {
+    position: absolute;
+    display: none;
+    font-size: 0.8rem;
+    top: 30%;
+    right: 20%;
+}
+
+.nav-icon a:hover .span1,
+.nav-icon a:hover .span2 {
+    display: inline-block;
+}
+
+/* content css starts here */
+main{
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; */
+    padding-top: 7rem;
+}
+/* header */
+header {
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    padding: 0 0 2rem 5rem;
+    font-weight: bolder;
+}
+
+/* content 1 */
+.content-1 {
+    width: 95%;
+    margin: 2rem 0 10rem 2rem;
+}
+
+.content-1 h1{
+    font-family: 'Ibarra Real Nova','Courier';
+    font-size: 4rem;
+    line-height: 70px;
+    margin-bottom: 1rem;
+}
+
+.content-1 img {
+    width: 100%;
+}
+
+.content-1 p{
+    font-size: 1.2rem;
+    text-align: justify;
+}
+
+/* content 2 */
+.content-2 {
+    width: 95%;
+    margin: 2rem 0 10rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+
+.content-2 h1{
+    font-family: 'Ibarra Real Nova', 'Courier';
+    font-size: 3rem;
+    line-height: 70px;
+    margin-bottom: 2rem;
+}
+
+.content-2 p{
+    line-height: 31px;
+}
+
+/* team container */
+.team-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 10rem;
+}
+
+.team-title {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.team-title h1{
+    font-family: 'Ibarra Real Nova', 'Courier';
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.team-title p{
+    width: 45%;
+    margin: 0 auto;
+    line-height: 30px;
+}
+
+.team-img {
+    display: flex;
+    justify-content:space-between;
+}
+
+.image-card {
+    padding: 0 2rem;
+}
+
+.image-card a {
+    text-decoration: none;
+    color: #000000;
+}
+.image-card h3 {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.image-card span {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    color: rgba(105, 65, 198, 1);
+}
+
+/* inbox */
+.inbox-discussion {
+    position: relative;
+    width: 80%;
+    height: 50vh;
+    margin: 0 11rem;
+    background-color: rgba(231, 249, 253, 1);
+    border-radius: 60px;
+    /* border: solid; */
+    padding-top: 2rem;
+    overflow: hidden;
+}
+
+.inbox-discussion .salad1 {
+    position: absolute;
+    left: -7.6%;
+}
+
+.inbox-discussion .salad2 {
+    position: absolute;
+    right: -7.7%;
+    margin-top: 6.5rem;
+}
+
+.inbox-text,
+.subscribeButton {
+    width: 80%;
+    margin: auto;
+    /* border: solid; */
+    text-align: center;
+}
+
+.inbox-text h2 {
+    font-size: 48px;
+}
+
+.inbox-text p {
+    margin: 1rem 0;
+    line-height: 30px;
+}
+
+.subscribeButton {
+    margin-top: 4rem;
+}
+
+.subscribeButton input[type="email"] {
+    position: relative;
+    width: 480px;
+    height: 80px;
+    border-radius: 24px;
+    padding-left: 1rem;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.subscribeButton input[type="email"]::placeholder {
+    font-size: 14px;
+}
+
+.subscribeButton input[type="submit"] {
+    position: absolute;
+    width: 160px;
+    height: 60px;
+    border-radius: 16px;
+    background-color: #000000;
+    color: #FFFFFF;
+    right: 28%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* footer */
+
+footer {
+    margin: 10rem 0 0 4rem;
+    width: 90%;
+    height: 30vh;
+}
+
+
+.upper-footer ul li {
+    display: inline-block;
+    padding: 0 1rem;
+    font-size: 19px;
+}
+
+.upper-footer {
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.upper-footer ul {
+    float: right;
+    line-height: 80px;
+}
+
+.upper-footer a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.upper-footer label {
+    line-height: 80px;
+    font-family: 'Lobster', sans-serif;
+    font-size: 24px;
+}
+
+.lower-footer span {
+    line-height: 80px;
+    margin-left: 30rem;
+    font-size: 18px;
+}
+
+.lower-footer ul li {
+    display: inline-block;
+    padding: 0 1rem;
+    line-height: 80px;
+}
+
+.lower-footer a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.lower-footer ul {
+    float: right;
+}

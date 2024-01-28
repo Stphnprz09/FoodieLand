@@ -83,6 +83,7 @@ def logout():
     session.clear()
     return render_template('logIn.html')
 
+# HOME
 @app.route('/home')
 def home():
     return render_template('home.html')
@@ -106,6 +107,10 @@ def contact():
         mail.send(msg_Feedback)
         
     return render_template('contact.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 # ADD RECIPE
 @app.route('/addRecipe')
