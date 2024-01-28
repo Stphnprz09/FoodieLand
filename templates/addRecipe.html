@@ -17,14 +17,21 @@
             <label class="logo">FoodieLand</label>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Recipes</a></li>
-                <li><a href="{{ url_for('blogList') }}">Blog</a></li>
+                <div class="dropClass">
+                    <li>
+                        <button>Recipe</button>
+                        <div class="dropContent">
+                            <a href="">Menu Recipe</a>
+                            <a href="">Submit Recipe</a>
+                        </div>
+                    </li>
+                </div>
+                <li><a href="{{url_for('blogList')}}">Blog</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">About Us</a></li>
                 <div class="nav-icon">
-                    <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
-                    <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa-solid fa-user"></i><span class="span1">Profile</span></a></li>
+                    <li><a href="{{url_for('logout')}}"><i class="fa-solid fa-right-from-bracket"></i><span class="span2">Logout</span></a></li>
                 </div>
             </ul>
         </nav>

@@ -60,6 +60,12 @@ def login():
 
     return render_template('logIn.html')
 
+# LOG OUT
+@app.route('/logout')
+def logout():
+    session.clear()
+    return render_template('logIn.html')
+
 # ADD RECIPE
 @app.route('/addRecipe')
 def addRecipe():
