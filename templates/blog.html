@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/blog.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css
+            " integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/mainlogo.png') }}" type="image/x-icon">
+    <title>Full Guide to Become Professional Chef | FoodieLand</title>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <label class="logo">FoodieLand</label>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <div class="dropClass">
+                    <li>
+                        <button>Recipe</button>
+                        <div class="dropContent">
+                            <a href="">Menu Recipe</a>
+                            <a href="{{url_for('addRecipe')}}">Submit Recipe</a>
+                        </div>
+                    </li>
+                </div>
+                <li><a href="{{url_for('blogList')}}">Blog</a></li>
+                <li><a href="{{url_for('contact')}}">Contact</a></li>
+                <li><a href="{{url_for('about')}}">About Us</a></li>
+                <div class="nav-icon">
+                    <li><a href="#"><i class="fa-solid fa-user"></i><span class="span1">Profile</span></a></li>
+                    <li><a href="{{url_for('logout')}}"><i class="fa-solid fa-right-from-bracket"></i><span
+                                class="span2">Logout</span></a></li>
+                </div>
+            </ul>
+        </nav>
+
+        <!-- content starts here -->
+        <main>
+            <!-- title text -->
+            <div class="title-text">
+                <h1>Full Guide to Becoming a Professional Chef</h1>
+                <p>Navigate the path to becoming a professional chef with this detailed guide, offering practical advice on culinary
+                education, hands-on training, honing essential skills, and navigating the culinary world to achieve success in the
+                competitive field of gastronomy.</p>
+            </div>
+
+            <!-- video content -->
+            <div class="video-content">
+                <iframe width="1005" height="500" src="https://www.youtube.com/embed/F0ymFpJ4MNk?si=1fzxelJ1_ejlBAo9"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            </div>
+
+            <!-- text content -->
+            <div class="content-text1">
+                <h2>How did you start out in the food industry?</h2>
+                <p>Unlocking success in the food industry commences with a genuine passion for culinary arts and a commitment to continuous
+                learning. Begin your journey by investing time in formal culinary education or seeking apprenticeships to acquire
+                foundational skills. Embrace entry-level positions with enthusiasm, treating them as valuable stepping stones for
+                experience and networking. Cultivate a diverse palate and culinary knowledge, staying attuned to industry trends.
+                Lastly, build a professional network, seek mentorship, and always remain adaptable and resilient, turning challenges
+                into opportunities for growth on your path to culinary success.</p>
+            </div>
+
+            <div class="content-text2">
+                <h2>What do you like most about your job?</h2>
+                <p>Embarking on the culinary journey is an enchanting odyssey, one that invites you to explore the vast and delectable
+                world of flavors, textures, and creativity. What I love most about cooking is the sheer magic that unfolds in the
+                kitchen—the alchemy of combining diverse ingredients, the symphony of sizzling pans, and the aromatic dance that fills
+                the air. It's a canvas of endless possibilities where you, as a culinary artist, have the power to transform raw
+                elements into a symphony for the senses. Aspiring chefs, let this be your guiding light—a passionate exploration into
+                the heart of culinary arts, where each dish becomes a masterpiece, and each creation is an expression of your unique
+                culinary voice. Embrace the artistry, savor the learning process, and relish the joy that comes from creating something
+                truly extraordinary. Welcome to the enchanting world of becoming a chef, where the kitchen is your canvas, and your
+                culinary journey is a masterpiece in the making.</p>
+            </div>
+
+            <div class="content-text3">
+                <h2>Do you cook at home on your days off?</h2>
+                <img src="{{url_for('static',filename='img/homecook.png')}}" alt="">
+                <p>Embracing the art of cooking extends beyond the professional realm, transcending into a personal passion that enriches
+                your everyday life. On your cherished days off, let the kitchen be your sanctuary, where the delightful aromas of
+                creativity and culinary exploration waft through the air. As you embark on your journey to becoming a chef, relish these
+                moments of respite by experimenting with new recipes, honing your skills, and savoring the joy that comes from crafting
+                a meal with your own hands. Home cooking becomes a canvas for self-expression, a place where your culinary dreams take
+                flight, and where the simple act of preparing a delicious dish becomes a celebration of your newfound skills. So, dear
+                aspiring chefs, let your days off be a canvas for inspiration, a reminder that the magic of cooking is not just a
+                profession but a lifelong love affair with the artistry of flavor and the joy of sharing it with others.</p>
+            </div>
+
+            <div class="content-text4">
+                <h2>What would your advice be to young people looking to get their foot in the door?</h2>
+                <p>To the aspiring culinary maestros eager to embark on their gastronomic odyssey, my advice is to approach the kitchen
+                with a blend of passion, curiosity, and unyielding dedication. Begin by immersing yourself in the rich tapestry of
+                culinary education, whether through formal training or hands-on experience. Embrace every opportunity to learn, from the
+                basics of knife skills to the nuances of flavor pairing. Seek mentorship from seasoned chefs, absorb their wisdom, and
+                let their guidance shape your culinary identity. Don't shy away from starting at the grassroots—every chop, sauté, and
+                simmer lays the foundation for mastery. Stay resilient in the face of challenges, for the culinary world is as demanding
+                as it is rewarding. Most importantly, let your creativity shine, infusing each dish with your unique perspective. As you
+                step into the realm of becoming a chef, remember that the journey is as savory as the destination, and with each
+                culinary creation, you're not just honing your skills but crafting a legacy of flavors that will linger in the hearts
+                and palates of those you feed.</p>
+            </div>
+
+            <div class="content-text5">
+                <blockquote>"Cooking is an art, and a good dish is like a beautiful painting; it's a creation that speaks to the soul and leaves a
+                lasting impression."</blockquote>                
+            </div>
+
+            <div class="content-text6">
+                <h2>What is the biggest misconception that people have about being a professional chef?</h2>
+                <p>Amidst the alluring aromas and culinary creativity, one common misconception aspiring chefs often encounter is the
+                romanticized notion that a career in the culinary arts is solely about glamour and grandeur. The truth, however, is that
+                the path to becoming a professional chef demands unwavering dedication, resilience, and an unyielding commitment to the
+                craft. Beyond the spotlight of television kitchens, the real magic unfolds in the daily grind, where precision, time
+                management, and the ability to adapt are paramount. It's not just about creating exquisite dishes; it's about embracing
+                the relentless pursuit of perfection, often in high-pressure environments. Yet, within the challenges lies the true
+                beauty—a canvas for self-expression, innovation, and the joy of delighting others through the art of gastronomy. So,
+                dear beginners, dispel the notion of glamour and embrace the reality that each kitchen triumph and setback is a stepping
+                stone on your journey to becoming a culinary virtuoso, creating a legacy one dish at a time.</p>
+            </div>
+
+            <!-- inbox -->
+            <div class="inbox-discussion">
+                <img src="{{ url_for('static', filename='img/salad1.png') }}" alt="salad1" class="salad1">
+                <img src="{{ url_for('static', filename='img/salad2.png') }}" alt="salad2" class="salad2">
+                <div class="inbox-text">
+                    <h2>Deliciousness to your inbox</h2>
+                    <p>"Experience a delectable journey as we bring the essence of delightful flavors and culinary delights straight
+                        to your
+                        inbox with our curated newsletter – a tasteful adventure awaits!"</p>
+                </div>
+                <div class="subscribeButton">
+                    <form action="{{url_for('subscribe')}}" method="POST">
+                        <input type="email" name="email" id="discussion" placeholder="Your email address...">
+                        <input type="submit" value="Subscribe">
+                    </form>
+                </div>
+            </div>
+            
+            <!-- footer -->
+            <footer>
+                <div class="upper-footer">
+                    <label for="foodieLand">FoodieLand.</label>
+                    <ul>
+                        <li><a href="#">Recipes</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="lower-footer">
+                    <span>&copy;2024 Group 9 - ITE1</span>
+                    <ul>
+                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>

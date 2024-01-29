@@ -88,6 +88,11 @@ def logout():
 def home():
     return render_template('home.html')
 
+# Blog
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
+
 # contact us
 @app.route('/contact', methods=['GET','POST'])
 def contact():
