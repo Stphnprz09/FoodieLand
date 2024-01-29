@@ -1,10 +1,22 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from flask_mail import Mail
+from flask_mail import Message
 import mysql.connector
 import requests
 
 app = Flask(__name__)
 
 app.secret_key = 'your_secret_key'
+
+# Add your email configuration
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'perezstephenmathew360@gmail.com'
+app.config['MAIL_PASSWORD'] = 'iuzb rwcr plru jpow '
+app.config['MAIL_DEFAULT_SENDER'] = 'perezstephenmathew360@gmail.com'
+
+mail = Mail(app)
 
 # Configure SQL
 app.config['MYSQL_DATABASE_USER'] = 'root'
@@ -24,8 +36,8 @@ db_connection = mysql.connector.connect(
 cursor = db_connection.cursor(dictionary=True)
 
 @app.route('/')
-# def home():
-#     return 'Home Page'
+def landing():
+    return render_template('landingPage.html')
 
 # SIGN IN
 @app.route('/signin', methods=['GET', 'POST'])
@@ -35,11 +47,16 @@ def signin():
         email = request.form['email']
         password = request.form['password']
         
-        cursor.execute("INSERT INTO user (userName, email, password) VALUES (%s, %s, %s)", (username, email, password))
-    
-        db_connection.commit()
-        return redirect(url_for('login'))
-      
+        cursor.execute("SELECT * FROM user WHERE userName = %s", (username,))
+        existing_username = cursor.fetchone()
+        
+        if existing_username:
+            return render_template('signIn.html', error='Username already exist, please try another username')
+        else:
+            cursor.execute("INSERT INTO user (userName, email, password) VALUES (%s, %s, %s)", (username, email, password))
+            db_connection.commit()
+            return redirect(url_for('login'))    
+          
     return render_template('signIn.html',sucess='You successfully created an account. Please log in')
 
 # LOG IN 
@@ -54,11 +71,64 @@ def login():
 
         if user:
             session['email'] = email
-            return redirect(url_for('addRecipe'))
+            return redirect(url_for('home'))
         else:
             return render_template('logIn.html', error='Login failed. Please check your email and password.')
 
     return render_template('logIn.html')
+
+# LOG OUT
+@app.route('/logout')
+def logout():
+    session.clear()
+    return render_template('landingPage.html')
+
+# HOME
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
+# Blog
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
+
+# contact us
+@app.route('/contact', methods=['GET','POST'])
+def contact():
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        subject = request.form['subject']
+        message = request.form['message']
+        
+        # SQL command to execute
+        cursor.execute("INSERT INTO contact (name, email, subject, message) VALUES (%s, %s, %s, %s)", (name, email, subject, message))
+        db_connection.commit()
+        
+        # command to email back 
+        msg_Feedback = Message('Thank you for your feedback!', recipients=[email])
+        msg_Feedback.body = f"Dear {name},\n\nThank you for contacting us. We appreciate your feedback.\n\nThis message is for your softcopy of your concern\n\nSubject: {subject},\n\nMessage: {message},\n\nBest regards,\nThe Group 9 - FoodieLand Team" 
+        mail.send(msg_Feedback)
+        
+    return render_template('contact.html')
+
+# SUBSCRIBE FUNCTION
+@app.route('/subscribe', methods=['GET','POST'])
+def subscribe():
+    if request.method == 'POST':
+        email = request.form['email']
+        
+        msg_Feedback = Message('Thanks for Subscribing to FoodieLand – Your Food Sharing Hub! 🍽️', recipients=[email])
+        msg_Feedback.body = f"Dear Subscriber,\n\nThank you for subscribing to FoodieLand – Your Food Sharing Hub! 🍽️ Get ready to embark on a culinary adventure with us. From mouthwatering recipes to inspiring food stories, we can't wait to share the joy of delicious experiences together.\n\nStay tuned for exciting updates, exclusive content, and a feast of flavors!\n\nBest Regards,\nThe FoodieLand Team"
+        mail.send(msg_Feedback)
+        
+    return render_template('home.html')
+
+# ABOUT
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 # ADD RECIPE
 @app.route('/addRecipe')

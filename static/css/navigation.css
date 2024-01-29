@@ -24,8 +24,12 @@ nav {
     /* display: none; */
 }
 
+span.logoDot {
+    color: #FF7426;
+}
+
 nav ul li,
-.nav-icon {
+.dropClass .nav-icon {
     display: inline-block;
     margin: 0 1rem;
 }
@@ -33,7 +37,7 @@ nav ul li,
 nav ul {
     float: right;
     line-height: 80px;
-    margin-right: 2rem;
+    /* margin-right: 0rem; */
 }
 
 nav a {
@@ -43,9 +47,8 @@ nav a {
     border-radius: 5px;
 }
 
-nav a:hover {
-    background-color: #f0f0f0;
-    transition: 2s;
+nav a:hover{
+    color: #FF7426;
 }
 
 label.logo {
@@ -54,9 +57,75 @@ label.logo {
     font-weight: bold;
     font-size: 2em;
     font-family: 'Lobster', sans-serif;
+    cursor: pointer;
 }
 
+/* drop down css */
+.dropClass {
+    position: relative;
+    display: inline-block;
+}
+
+
+button {
+    font-size: 1rem;
+    border: none;
+    background-color: #FAF9F6;
+    cursor: pointer;
+}
+
+.dropContent {
+    position: absolute;
+    display: none;
+    top: 100%;
+    left: 10%;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    background: #FAF9F6;
+}
+
+.dropContent a {
+    font-size: 0.9rem;
+}
+
+.dropClass:hover .dropContent {
+    display: inline-block;
+}
+
+
+
+/* icons hover */
 .nav-icon {
-    margin-left: 9rem;
+    margin-left: 10rem;
+    display: inline-block;
+    position: relative;
+
 }
 
+.nav-icon li {
+    padding-right: 2rem;
+}
+
+
+.nav-icon .span1 {
+    display: none;
+    font-size: 0.8rem;
+    position: absolute;
+    top: 30%;
+    right: 33%;
+    padding-top: 0.5rem;
+}
+
+.nav-icon .span2 {
+    position: absolute;
+    display: none;
+    font-size: 0.8rem;
+    top: 30%;
+    left: 15%;
+    padding-top: 0.5rem;
+}
+
+.nav-icon a:hover .span1,
+.nav-icon a:hover .span2 {
+    display: inline-block;
+}
