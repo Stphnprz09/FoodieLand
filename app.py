@@ -81,7 +81,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.clear()
-    return render_template('logIn.html')
+    return render_template('landingPage.html')
 
 # HOME
 @app.route('/home')
@@ -89,7 +89,7 @@ def home():
     return render_template('home.html')
 
 # contact us
-@app.route('/contact', methods=['GET', 'POST'])
+@app.route('/contact', methods=['GET','POST'])
 def contact():
     if request.method == 'POST':
         name = request.form['name']
@@ -108,6 +108,19 @@ def contact():
         
     return render_template('contact.html')
 
+# SUBSCRIBE FUNCTION
+@app.route('/subscribe', methods=['GET','POST'])
+def subscribe():
+    if request.method == 'POST':
+        email = request.form['email']
+        
+        msg_Feedback = Message('Thanks for Subscribing to FoodieLand – Your Food Sharing Hub! 🍽️', recipients=[email])
+        msg_Feedback.body = f"Dear Subscriber,\n\nThank you for subscribing to FoodieLand – Your Food Sharing Hub! 🍽️ Get ready to embark on a culinary adventure with us. From mouthwatering recipes to inspiring food stories, we can't wait to share the joy of delicious experiences together.\n\nStay tuned for exciting updates, exclusive content, and a feast of flavors!\n\nBest Regards,\nThe FoodieLand Team"
+        mail.send(msg_Feedback)
+        
+    return render_template('home.html')
+
+# ABOUT
 @app.route('/about')
 def about():
     return render_template('about.html')

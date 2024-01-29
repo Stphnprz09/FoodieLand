@@ -72,8 +72,10 @@
                 inbox with our curated newsletter – a tasteful adventure awaits!"</p>
             </div>
             <div class="subscribeButton">
-                <input type="email" name="discussion" id="discussion" placeholder="Your email address...">
-                <input type="submit" value="Subscribe">
+                <form action="{{url_for('subscribe')}}" method="post">
+                    <input type="email" name="email" id="discussion" placeholder="Your email address...">
+                    <input type="submit" value="Subscribe">
+                </form>
             </div>
         </div>
         

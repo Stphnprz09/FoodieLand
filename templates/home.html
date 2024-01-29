@@ -21,7 +21,7 @@
                         <button>Recipe</button>
                         <div class="dropContent">
                             <a href="">Menu Recipe</a>
-                            <a href="{{addRecipe}}">Submit Recipe</a>
+                            <a href="{{url_for('addRecipe')}}">Submit Recipe</a>
                         </div>
                     </li>
                 </div>
@@ -146,8 +146,10 @@
                     inbox with our curated newsletter – a tasteful adventure awaits!"</p>
                 </div>
                 <div class="subscribeButton">
-                    <input type="email" name="discussion" id="discussion" placeholder="Your email address...">
-                    <input type="submit" value="Subscribe">
+                    <form action="{{url_for('subscribe')}}" method="POST">
+                        <input type="email" name="email" id="discussion" placeholder="Your email address...">
+                        <input type="submit" value="Subscribe">
+                    </form>
                 </div>
             </div>
             
