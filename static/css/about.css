@@ -50,8 +50,7 @@ nav a {
     border-radius: 5px;
 }
 
-nav a:hover,
-button:hover {
+nav a:hover{
     color: #FF7426;
 }
 

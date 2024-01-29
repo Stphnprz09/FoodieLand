@@ -48,8 +48,7 @@ nav a {
     border-radius: 5px;
 }
 
-nav a:hover,
-button:hover {
+nav a:hover {
     color: #FF7426;
 }
 
@@ -198,9 +197,9 @@ main {
     font-size: 1.2rem;
 }
 
-.tab a:hover {
+/* .tab a:hover {
     color: #FF7426;
-}
+} */
 
 .tab img {
     width: 100%;
@@ -236,9 +235,9 @@ main {
     border-radius: 16px;
 }
 
-.learn-more-side a:hover {
+/* .learn-more-side a:hover {
     color: #FF7426;
-}
+} */
 
 .image-side {
     background: linear-gradient(rgba(231, 249, 253, 0),rgba(231, 249, 253, 1));
@@ -287,9 +286,9 @@ main {
     border-radius: 16px;
 }
 
-.instagram-btn a:hover {
+/* .instagram-btn a:hover {
     color: #FF7426;
-}
+} */
 
 /* culinary journey css */
 .culinary-journey-container {
