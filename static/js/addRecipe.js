@@ -41,7 +41,7 @@ function notification() {
 
 // character counts
 function characterCount() {
-    let maxCount = 100;
+    let maxCount = 500;
     let descInput = document.getElementById('desc');
     let charCount = document.getElementById('charCount');
 
