@@ -3,6 +3,7 @@ from flask_mail import Mail
 from flask_mail import Message
 import mysql.connector
 import requests
+import base64
 
 app = Flask(__name__)
 
@@ -124,6 +125,18 @@ def subscribe():
         mail.send(msg_Feedback)
         
     return render_template('home.html')
+
+# MENU
+@app.route('/menu', methods=['GET', 'POST'])
+def menu():
+    cursor.execute("SELECT recipeTitle, recipeImg FROM recipe")
+    recipes = cursor.fetchall()
+
+    # Decode the image data to base64
+    for recipe in recipes:
+        recipe['recipeImg'] = base64.b64encode(recipe['recipeImg']).decode('utf-8')
+
+    return render_template('menu.html', recipes=recipes)
 
 # ABOUT
 @app.route('/about')
