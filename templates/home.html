@@ -57,27 +57,27 @@
                 <div class="categories-group">
                     <div class="tab">
                         <img src="{{ url_for('static', filename='img/bacon.png')}}" alt="bacon.png">
-                        <a href="">Breakfast</a>
+                        <a href="{{url_for('category', category='Breakfast')}}">Breakfast</a>
                     </div>
                     <div class="tab">
                         <img src="{{ url_for('static', filename='img/lettuce.png')}}" alt="bacon.png">
-                        <a href="">Lunch</a>
+                        <a href="{{url_for('category', category='Lunch')}}">Lunch</a>
                     </div>
                     <div class="tab">
                         <img src="{{ url_for('static', filename='img/steak.png')}}" alt="bacon.png">
-                        <a href="">Dinner</a>
+                        <a href="{{url_for('category', category='Dinner')}}">Dinner</a>
                     </div>
                     <div class="tab">
                         <img src="{{ url_for('static', filename='img/cake.png')}}" alt="bacon.png">
-                        <a href="">Desert</a>
+                        <a href="{{url_for('category', category='Dessert')}}">Desert</a>
                     </div>
                     <div class="tab">
                         <img src="{{ url_for('static', filename='img/salad.png')}}" alt="bacon.png">
-                        <a href="">Appetizer</a>
+                        <a href="{{url_for('category', category='Appetizer')}}">Appetizer</a>
                     </div>
                     <div class="tab">
                         <img src="{{ url_for('static', filename='img/coffee.png')}}" alt="bacon.png">
-                        <a href="">Drinks</a>
+                        <a href="{{url_for('category', category='Drinks')}}">Drinks</a>
                     </div>
                 </div>
             </div>

@@ -126,7 +126,7 @@ def subscribe():
         
     return render_template('home.html')
 
-# MENU
+# ALL MENU
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
     cursor.execute("SELECT recipeTitle, recipeImg FROM recipe")
@@ -138,9 +138,20 @@ def menu():
 
     return render_template('menu.html', recipes=recipes)
 
-# BREAKFAST MENU
 
+    
+# CATEGORY MENU
+@app.route('/category/<string:category>', methods=['GET','POST'])
+def category(category):
+    cursor.execute("SELECT recipeTitle, recipeImg FROM recipe WHERE category = %s",(category,))
+    category_recipes = cursor.fetchall()
+    
+    for recipe in category_recipes:
+        recipe['recipeImg'] = base64.b64encode(recipe['recipeImg']).decode('utf-8')
+    
+    return render_template('category.html', category=category, recipes=category_recipes)
 
+    
 # RECIPE DETAILS
 @app.route('/recipe/<string:recipe_title>')
 def details(recipe_title):
@@ -155,7 +166,6 @@ def details(recipe_title):
         return render_template('details.html', details=[details])
     else:
         return render_template('details.html', details=[])
-
 
 
 
