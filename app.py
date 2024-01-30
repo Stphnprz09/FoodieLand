@@ -131,8 +131,31 @@ def about():
     return render_template('about.html')
 
 # ADD RECIPE
-@app.route('/addRecipe')
+@app.route('/addRecipe', methods=['GET','POST'])
 def addRecipe():
+    if request.method == 'POST':
+        title = request.form['recipeTitle']
+        img = request.form['addImage']
+        description = request.form['desc']
+        ingredients = request.form['ingredients']
+        instruction = request.form['instructions']
+        serving = int(request.form['numServing'])
+        category = request.form['category']
+        
+        # this code will handle dynamic form
+        ingredients = request.form.getlist('ingredientNewInputs[]')
+        instruction = request.form.getlist('instructionNewInputs[]')
+
+        
+        # convert all the list and combine with the original strings
+        ingredients_list = '\n'.join(ingredients)
+        instruction_list = '\n'.join(instruction)
+        
+        cursor.execute("INSERT INTO recipe (recipeTitle, recipeImg, description, ingredients, instruction, serving, category) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                       (title, img, description, ingredients_list, instruction_list, serving, category))
+        db_connection.commit()
+        
+        return redirect(url_for('addRecipe'))
     return render_template('addRecipe.html')
 
 # BLOG LIST

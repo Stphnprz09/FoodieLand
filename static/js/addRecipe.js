@@ -15,6 +15,31 @@ function previewImage(event) {
     }
 }
 
+function browseButton() {
+    document.getElementById('addImage').click();
+}
+
+document.getElementById('browseButton').addEventListener('click', browseButton);
+
+// notification 
+function notification() {
+    const title = document.getElementById('title').value;
+    const image = document.getElementById('addImage').value;
+    const description = document.getElementById('desc').value;
+    const ingredients = document.getElementById('ingredients').value;
+    const instruction = document.getElementById('instructions').value;
+    const serving = document.getElementById('numServing').value;
+    const category = document.getElementById('category').value;
+
+    if (!title || !image || !description|| !ingredients  || !instruction   || !serving || !category ) {
+        alert("Please fill out the blanks")
+    } else {
+        alert("Thank you for submitting your own recipe");
+    }
+    
+}
+
+// character counts
 function characterCount() {
     let maxCount = 100;
     let descInput = document.getElementById('desc');
@@ -24,17 +49,20 @@ function characterCount() {
     charCount.textContent = remainingCharacter + " / " + maxCount; 
 }
 
+// add ingredients
 function addIngredient() {
     const container = document.getElementById('ingredientContainer');
     const newInput = document.createElement('input');
     newInput.type = 'text';
-    newInput.name = 'newInputs[]';
+    newInput.name = 'ingredientNewInputs[]';
     newInput.placeholder = 'Add Ingredients';
     newInput.maxLength = 100;
 
     container.appendChild(newInput);
     container.appendChild(document.createElement('br'));
 }
+
+// add intruction
 
 function addInstruction() {
     const container = document.querySelector('.instructionContainer');
@@ -50,7 +78,7 @@ function addInstruction() {
     // new input
     const newInput = document.createElement('input');
     newInput.type = 'text';
-    newInput.name = 'newInputs[]';
+    newInput.name = 'instructionNewInputs[]';
     newInput.placeholder = 'Add Instruction';
 
     // append label and input to new div
@@ -61,10 +89,3 @@ function addInstruction() {
     container.appendChild(newStepDiv);
 }
 
-
-
-function browseButton() {
-    document.getElementById('browseButton').addEventListener('click', function () {
-            document.getElementById('addImage').click();
-        });
-}
