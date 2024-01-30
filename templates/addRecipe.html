@@ -38,79 +38,69 @@
         </nav>
         <!-- navigation -->
         
-        <header>
-            <!-- header -->
-            <h2>Create new recipe</h2>
-            <button value="button">Save</button>
-        </header>
-
-        <!-- add recipe -->
-        <div class="addRecipe">
-            <!-- recipe title -->
-            <label>Recipe Title</label><br>
-            <input type="text" name="recipeTitle" placeholder="Add Title" class="title" required><br>
-
-            <!-- recipe image and preview -->
-            <label>Recipe Image</label><br>
-            <img id="imagePreview" alt="imgPreview" width="100px" height="80px" src="{{ url_for('static', filename='img/imgRecipe.png') }}"><br>
-            <div class="fileContainer">
-                <input type="file" name="addImage" id="addImage" name="image" accept="image/*" onchange="previewImage(event)"><br>
-                <img src="{{ url_for('static', filename='img/imgLogo.jpg') }}" alt="imgLogo" id="browseButton" onclick="browseButton()">
-            </div>
-
-            <!-- description -->
-            <label>Description: </label><br>
-            <input type="text" name="desc" id="desc" maxlength="100" required oninput="characterCount()" placeholder="Add Description"><br>
-            <span id="charCount">100/100</span><br>
+        <form action="{{url_for('addRecipe')}}" method="POST">
+            <header>
+                <!-- header -->
+                <h2>Create new recipe</h2>
+                <button value="button" onclick="notification()">Save</button>
+            </header>
             
-            <!-- ingredients -->
-            <label for="ingredients">Ingredients:</label><br>
-            <div id="ingredientContainer">
-                <input type="text" name="ingredients" id="ingredients" placeholder="Add ingredients" maxlength="100"><br>
+            <!-- add recipe -->
+            <div class="addRecipe">
+                <!-- recipe title -->
+                <label>Recipe Title</label><br>
+                <input type="text" name="recipeTitle" placeholder="Add Title" class="title" id="title" required><br>
+            
+                <!-- recipe image and preview -->
+                <label>Recipe Image</label><br>
+                <img id="imagePreview" alt="imgPreview" width="100px" height="80px"
+                    src="{{ url_for('static', filename='img/imgRecipe.png') }}"><br>
+                <div class="fileContainer">
+                    <input type="file" name="addImage" id="addImage" name="image" accept="image/*"
+                        onchange="previewImage(event)"><br>
+                    <img src="{{ url_for('static', filename='img/imgLogo.jpg') }}" alt="imgLogo" id="browseButton"
+                        onclick="browseButton()">
+                </div>
+            
+                <!-- description -->
+                <label>Description: </label><br>
+                <input type="text" name="desc" id="desc" maxlength="100" required oninput="characterCount()"
+                    placeholder="Add Description"><br>
+                <span id="charCount">500/500</span><br>
+            
+                <!-- ingredients -->
+                <label for="ingredients">Ingredients:</label><br>
+                <div id="ingredientContainer">
+                    <input type="text" name="ingredients" id="ingredients" placeholder="Add ingredients" maxlength="100"><br>
+                </div>
+                <span id="addIngredients" onclick="addIngredient()" style="cursor: pointer;">+ Add Ingredient</span><br><br>
+            
+                <!-- Instruction -->
+                <label for="instruction">Instructions</label><br>
+                <!-- <span id="tapToEdit">Tap to edit</span><br> -->
+                <span id="stepsInstruction">Step 1:</span>
+                <div class="instructionContainer">
+                    <input type="text" name="instructions" id="instructions" placeholder="Add Instruction">
+                </div>
+                <span id="addInstruction" onclick="addInstruction()">+ Add Instruction</span><br><br>
+            
+                <!-- Servings -->
+                <label for="servings">Servings: </label><br>
+                <input type="number" name="numServing" id="numServing" required placeholder="#">
+                <span class="serv1">how many does this recipe make?</span><br><br>
+            
+                <!-- category -->
+                <label for="category">Category: </label><br>
+                <select name="category" id="category">
+                    <option value="breakfast">Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="dinner">Dinner</option>
+                    <option value="appetizer">Appetizer</option>
+                    <option value="drinks">Drinks</option>
+                </select>
             </div>
-            <span id="addIngredients" onclick="addIngredient()" style="cursor: pointer;">+ Add Ingredient</span><br><br>
-
-            <!-- Instruction -->
-            <label for="instruction">Instructions</label><br>
-            <!-- <span id="tapToEdit">Tap to edit</span><br> -->
-            <span id="stepsInstruction">Step 1:</span>
-            <div class="instructionContainer">
-                <input type="text" name="instructions" id="instructions" placeholder="Add Instruction">
-            </div>
-            <span id="addInstruction" onclick="addInstruction()">+ Add Instruction</span><br><br>
-
-            <!-- Servings -->
-            <label for="servings">Servings: </label><br>
-            <input type="number" name="numServing" id="numServing" required placeholder="#">
-            <span class="serv1">how many does this recipe make?</span><br><br>
-
-            <!-- Cooking Time -->
-            <label for="cookingTime">Cooking Time: </label>
-            <div class="cookingTimeContainer">
-                <input type="number" name="hours" id="hours" placeholder="Hours 0">
-                <input type="number" name="minutes" id="minutes" placeholder="Minutes 0">
-            </div>
-            <span class="cook1">How long does it take to cook this recipe?</span><br><br>
-
-            <!-- Preparation Time -->
-            <label for="prepTime">Preparation Time: </label>
-            <div class="prepTimeContainer">
-                <input type="number" name="hours" id="hours" placeholder="Hours 0">
-                <input type="number" name="minutes" id="minutes" placeholder="Minutes 0">
-            </div>
-            <span class="prep1">How long does it take to prepare this recipe?</span><br><br>
-
-            <!-- category -->
-            <label for="category">Category: </label><br>
-            <select name="category" id="category">
-                <option value="breakfast">Breakfast</option>
-                <option value="lunch">Lunch</option>
-                <option value="dinner">Dinner</option>
-                <option value="appetizer">Appetizer</option>
-                <option value="drinks">Drinks</option>
-            </select>
-        </div>
-
+        </form>
+    
         <!-- inbox -->
         <div class="inbox-discussion">
             <img src="{{ url_for('static', filename='img/salad1.png') }}" alt="salad1" class="salad1">

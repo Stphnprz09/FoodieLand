@@ -3,6 +3,7 @@ from flask_mail import Mail
 from flask_mail import Message
 import mysql.connector
 import requests
+import base64
 
 app = Flask(__name__)
 
@@ -125,14 +126,70 @@ def subscribe():
         
     return render_template('home.html')
 
+# MENU
+@app.route('/menu', methods=['GET', 'POST'])
+def menu():
+    cursor.execute("SELECT recipeTitle, recipeImg FROM recipe")
+    recipes = cursor.fetchall()
+
+    # Decode img data to base64
+    for recipe in recipes:
+        recipe['recipeImg'] = base64.b64encode(recipe['recipeImg']).decode('utf-8')
+
+    return render_template('menu.html', recipes=recipes)
+
+# BREAKFAST MENU
+
+
+# RECIPE DETAILS
+@app.route('/recipe/<string:recipe_title>')
+def details(recipe_title):
+    cursor.execute("SELECT * FROM recipe WHERE recipeTitle = %s", (recipe_title,))
+    details = cursor.fetchone()
+
+    # Check if details is not null
+    if details:
+        # Decode img data to base64
+        details['recipeImg'] = base64.b64encode(details['recipeImg']).decode('utf-8')
+
+        return render_template('details.html', details=[details])
+    else:
+        return render_template('details.html', details=[])
+
+
+
+
 # ABOUT
 @app.route('/about')
 def about():
     return render_template('about.html')
 
 # ADD RECIPE
-@app.route('/addRecipe')
+@app.route('/addRecipe', methods=['GET','POST'])
 def addRecipe():
+    if request.method == 'POST':
+        title = request.form['recipeTitle']
+        img = request.form['addImage']
+        description = request.form['desc']
+        ingredients = request.form['ingredients']
+        instruction = request.form['instructions']
+        serving = int(request.form['numServing'])
+        category = request.form['category']
+        
+        # this code will handle dynamic form
+        ingredients = request.form.getlist('ingredientNewInputs[]')
+        instruction = request.form.getlist('instructionNewInputs[]')
+
+        
+        # convert all the list and combine with the original strings
+        ingredients_list = '\n'.join(ingredients)
+        instruction_list = '\n'.join(instruction)
+        
+        cursor.execute("INSERT INTO recipe (recipeTitle, recipeImg, description, ingredients, instruction, serving, category) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                       (title, img, description, ingredients_list, instruction_list, serving, category))
+        db_connection.commit()
+        
+        return redirect(url_for('addRecipe'))
     return render_template('addRecipe.html')
 
 # BLOG LIST
