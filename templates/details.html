@@ -37,24 +37,95 @@
             </ul>
         </nav>
 
+        <!-- Adjusted section of the template -->
         <main>
+            {% for detail in details %}
             <div class="recipe-container">
                 <div class="recipe-title">
-                    <h1>{{ recipe['recipeTitle'] }}</h1>
+                    <h1>{{ detail['recipeTitle'] }}</h1>
                 </div>
-                
                 <div class="serving-share-container">
                     <div class="serving-container">
-                        <span>Serving: {{ recipe['serving'] }}</span>
+                        <img src="{{url_for('static',filename='img/serving.png')}}" class="img1">
+                        <span class="span1"> Serving:  {{ detail['serving'] }}</span><br>
+                        <img src="{{url_for('static',filename='img/category1.png')}}" class="img2">
+                        <span class="span2">Category: {{ detail['category']}}</span>
                     </div>
                     <div class="print-share-container">
-                        <button><i class="fa-solid fa-print"></i></button>
-                        <button><i class="fa-solid fa-copy"></i></button>
-                        <button><i class="fa-regular fa-bookmark"></i></button>
+                        <button onclick="printPDF()"><i class="fa-solid fa-print"></i></button>
+                        <button onclick="copyURL()"><i class="fa-solid fa-copy"></i></button>
+                        <button onclick="addBookmark()"><i id="heartIcon" class="fa-regular fa-bookmark"></i></button>
                     </div>
                 </div>
+                <div class="recipe-img">
+                    <img src="data:image/png;base64,{{ detail['recipeImg'] }}" alt="{{ detail['recipeTitle'] }} Image">
+                </div>
+                <div class="recipe-desc">
+                    <p>{{detail['description']}}</p>
+                </div>
+                <div class="recipe-ingredients">
+                    <h2>Ingredients</h2>
+                    <ul>
+                        {% for ingredient in detail['ingredients'].splitlines() %}
+                        <li>{{ ingredient }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="recipe-instruction">
+                    <h2>Instruction</h2>
+                    <ol>
+                        {% for instruction in detail['instruction'].splitlines() %}
+                        <li>{{ instruction }}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
             </div>
+            {% endfor %}
+
+            <!-- inbox -->
+            <div class="inbox-discussion">
+                <img src="{{ url_for('static', filename='img/salad1.png') }}" alt="salad1" class="salad1">
+                <img src="{{ url_for('static', filename='img/salad2.png') }}" alt="salad2" class="salad2">
+                <div class="inbox-text">
+                    <h2>Deliciousness to your inbox</h2>
+                    <p>"Experience a delectable journey as we bring the essence of delightful flavors and culinary delights straight
+                        to your
+                        inbox with our curated newsletter – a tasteful adventure awaits!"</p>
+                </div>
+                <div class="subscribeButton">
+                    <form action="{{url_for('subscribe')}}" method="POST">
+                        <input type="email" name="email" id="discussion" placeholder="Your email address...">
+                        <input type="submit" value="Subscribe">
+                    </form>
+                </div>
+            </div>
+            
+            <!-- footer -->
+            <footer>
+                <div class="upper-footer">
+                    <label for="foodieLand">FoodieLand.</label>
+                    <ul>
+                        <li><a href="#">Recipes</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="lower-footer">
+                    <span>&copy;2024 Group 9 - ITE1</span>
+                    <ul>
+                        <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-x-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </footer>
         </main>
+
     </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+    integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{url_for('static', filename='js/printHTMLtoPDF.js')}}"></script>
 </html>

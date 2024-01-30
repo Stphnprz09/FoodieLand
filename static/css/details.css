@@ -139,19 +139,17 @@ main {
 }
 
 .recipe-container {
-    border: solid;
     width: 90%;
 }
 
 
 /* db title */
 .recipe-title h1{
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 /* db serving */
 .serving-share-container {
-
     display: grid;
     grid-template-columns: repeat(2,1fr);
     margin: 3rem 0;
@@ -163,6 +161,189 @@ main {
 
 .print-share-container button {
     padding: 1rem;
+    margin: 0 1rem;
     border: solid;
     border-radius: 50%;
+}
+
+.serving-container .span1{
+    font-size: 1.5rem;
+    position: absolute;
+    top: 36%;
+    left: 9%;
+}
+
+.serving-container .span2 {
+    font-size: 1.5rem;
+    position: absolute;
+    top: 42%;
+    left: 9%;
+}
+
+.serving-container .img1 {
+    width: 40px;
+    height: 40px;
+}
+
+.serving-container .img2 {
+    width: 40px;
+    height: 30px;
+}
+/* recipe img */
+.recipe-img {
+    margin-top: 2rem;
+    width: 100%;
+    text-align: center;
+}
+
+.recipe-img img{
+    width: 50%;
+    height: 400px;
+}
+
+/* recipe description */
+.recipe-desc {
+    margin: 2rem 0 5rem 0;
+}
+
+/* recipe ingredients */
+.recipe-ingredients {
+    height: auto;
+    margin-bottom: 4rem;
+}
+
+.recipe-ingredients ul,li,
+.recipe-instruction {
+    margin: 1rem 0 0 0.5rem;
+}
+
+.recipe-instruction {
+    margin-bottom: 5rem;
+}
+
+/* inbox */
+.inbox-discussion {
+    position: relative;
+    width: 80%;
+    height: 50vh;
+    margin: 0 11rem;
+    background-color: rgba(231, 249, 253, 1);
+    border-radius: 60px;
+    /* border: solid; */
+    padding-top: 2rem;
+    overflow: hidden;
+}
+
+.inbox-discussion .salad1 {
+    position: absolute;
+    left: -7.6%;
+}
+
+.inbox-discussion .salad2 {
+    position: absolute;
+    right: -7.7%;
+    margin-top: 6.5rem;
+}
+
+.inbox-text,
+.subscribeButton {
+    width: 80%;
+    margin: auto;
+    /* border: solid; */
+    text-align: center;
+}
+
+.inbox-text h2 {
+    font-size: 48px;
+}
+
+.inbox-text p {
+    margin: 1rem 0;
+    line-height: 30px;
+}
+
+.subscribeButton {
+    margin-top: 4rem;
+}
+
+.subscribeButton input[type="email"] {
+    position: relative;
+    width: 480px;
+    height: 80px;
+    border-radius: 24px;
+    padding-left: 1rem;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.subscribeButton input[type="email"]::placeholder {
+    font-size: 14px;
+}
+
+.subscribeButton input[type="submit"] {
+    position: absolute;
+    width: 160px;
+    height: 60px;
+    border-radius: 16px;
+    background-color: #000000;
+    color: #FFFFFF;
+    right: 28%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* footer */
+
+footer {
+    margin: 10rem 0 0 4rem;
+    width: 90%;
+    height: 30vh;
+}
+
+
+.upper-footer ul li {
+    display: inline-block;
+    padding: 0 1rem;
+    font-size: 19px;
+}
+
+.upper-footer {
+    padding-bottom: 4rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.upper-footer ul {
+    float: right;
+    line-height: 80px;
+}
+
+.upper-footer a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.upper-footer label {
+    line-height: 80px;
+    font-family: 'Lobster', sans-serif;
+    font-size: 24px;
+}
+
+.lower-footer span {
+    line-height: 80px;
+    margin-left: 30rem;
+    font-size: 18px;
+}
+
+.lower-footer ul li {
+    display: inline-block;
+    padding: 0 1rem;
+    line-height: 80px;
+}
+
+.lower-footer a {
+    text-decoration: none;
+    color: #000000;
+}
+
+.lower-footer ul {
+    float: right;
 }

@@ -132,19 +132,31 @@ def menu():
     cursor.execute("SELECT recipeTitle, recipeImg FROM recipe")
     recipes = cursor.fetchall()
 
-    # Decode the image data to base64
+    # Decode img data to base64
     for recipe in recipes:
         recipe['recipeImg'] = base64.b64encode(recipe['recipeImg']).decode('utf-8')
 
     return render_template('menu.html', recipes=recipes)
 
+# BREAKFAST MENU
+
+
 # RECIPE DETAILS
 @app.route('/recipe/<string:recipe_title>')
 def details(recipe_title):
     cursor.execute("SELECT * FROM recipe WHERE recipeTitle = %s", (recipe_title,))
-    recipe = cursor.fetchone()
+    details = cursor.fetchone()
 
-    return render_template('details.html', recipe=recipe)
+    # Check if details is not null
+    if details:
+        # Decode img data to base64
+        details['recipeImg'] = base64.b64encode(details['recipeImg']).decode('utf-8')
+
+        return render_template('details.html', details=[details])
+    else:
+        return render_template('details.html', details=[])
+
+
 
 
 # ABOUT
