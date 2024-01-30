@@ -138,6 +138,15 @@ def menu():
 
     return render_template('menu.html', recipes=recipes)
 
+# RECIPE DETAILS
+@app.route('/recipe/<string:recipe_title>')
+def details(recipe_title):
+    cursor.execute("SELECT * FROM recipe WHERE recipeTitle = %s", (recipe_title,))
+    recipe = cursor.fetchone()
+
+    return render_template('details.html', recipe=recipe)
+
+
 # ABOUT
 @app.route('/about')
 def about():

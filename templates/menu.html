@@ -46,7 +46,7 @@
                         <img src="data:image/png;base64,{{ recipe['recipeImg'] }}" alt="{{ recipe['recipeTitle'] }} Image">
                     </div>
                     <h5>{{ recipe['recipeTitle'] }}</h5>
-                    <button>View Recipe</button>
+                    <a href="{{url_for('details', recipe_title=recipe['recipeTitle'])}}"><button>View Recipe</button></a>
                 </div>
                 {% endfor %}
             </div>
