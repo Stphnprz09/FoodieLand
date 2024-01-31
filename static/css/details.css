@@ -156,7 +156,18 @@ main {
 }
 
 .print-share-container{
+    margin-left: 12rem;
     text-align: right;
+    display: grid;
+    grid-template-columns: 1.5fr 0.5fr;
+}
+
+.button-class {
+    text-align: right;
+}
+
+.print-share-container form {
+    text-align: left;
 }
 
 .print-share-container button {

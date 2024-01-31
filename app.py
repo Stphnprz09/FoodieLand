@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session , jsonify, json
 from flask_mail import Mail
 from flask_mail import Message
 import mysql.connector
@@ -48,7 +48,7 @@ def signin():
         email = request.form['email']
         password = request.form['password']
         
-        cursor.execute("SELECT * FROM user WHERE userName = %s", (username,))
+        cursor.execute("SELECT userName,email,password FROM user WHERE userName = %s", (username,))
         existing_username = cursor.fetchone()
         
         if existing_username:
@@ -167,10 +167,26 @@ def details(recipe_title):
     else:
         return render_template('details.html', details=[])
 
-# BOOKMARK
-@app.route('/bookmark')
-def bookmark():
-    return render_template('bookmark.html')
+# BOOKMARK EMAIL
+@app.route('/bookmark', methods=['POST'])
+def bookmark_recipe():
+    if 'email' in session:
+        email = session['email']
+        recipe_title = request.form.get('recipeTitle')
+        recipe_ingredients = request.form.get('ingredients')
+        recipe_instruction = request.form.get('instruction')
+
+        # Retrieve other recipe details as needed
+
+        # Send email with recipe details
+        msg_recipe = Message(f'Bookmark - {recipe_title}', recipients=[email])
+        msg_recipe.body = f"Dear Foodie,\n\nYou've bookmarked the recipe '{recipe_title}'.\n\nIngredients:\n'{recipe_ingredients}\n\nInstruction:\n{recipe_instruction}\n\nHappy cooking!\n\nBest Regards,\nThe FoodieLand Team"
+
+        mail.send(msg_recipe)
+        
+        return render_template('details.html')
+
+
 
 # ABOUT
 @app.route('/about')
