@@ -167,7 +167,10 @@ def details(recipe_title):
     else:
         return render_template('details.html', details=[])
 
-
+# BOOKMARK
+@app.route('/bookmark')
+def bookmark():
+    return render_template('bookmark.html')
 
 # ABOUT
 @app.route('/about')

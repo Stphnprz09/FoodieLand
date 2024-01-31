@@ -162,21 +162,21 @@ main {
 .print-share-container button {
     padding: 1rem;
     margin: 0 1rem;
-    border: solid;
+    border: 0.5px solid #000000;
     border-radius: 50%;
 }
 
 .serving-container .span1{
     font-size: 1.5rem;
     position: absolute;
-    top: 33%;
+    top: 36%;
     left: 9%;
 }
 
 .serving-container .span2 {
     font-size: 1.5rem;
     position: absolute;
-    top: 39%;
+    top: 42%;
     left: 9%;
 }
 
