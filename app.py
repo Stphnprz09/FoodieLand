@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session , jsonify, json
 from flask_mail import Mail
 from flask_mail import Message
 import mysql.connector
@@ -48,7 +48,7 @@ def signin():
         email = request.form['email']
         password = request.form['password']
         
-        cursor.execute("SELECT * FROM user WHERE userName = %s", (username,))
+        cursor.execute("SELECT userName,email,password FROM user WHERE userName = %s", (username,))
         existing_username = cursor.fetchone()
         
         if existing_username:
@@ -77,6 +77,126 @@ def login():
             return render_template('logIn.html', error='Login failed. Please check your email and password.')
 
     return render_template('logIn.html')
+
+# ADMIN LOG IN
+@app.route('/adminLogin', methods=['GET','POST'])
+def adminLogin():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        cursor.execute("SELECT * FROM admin WHERE email=%s AND password=%s", (email, password))
+        user = cursor.fetchone()
+
+        if user:
+            session['email'] = email
+            return redirect(url_for('adminDashboard'))
+        else:
+            return render_template('adminLogin.html', error='Login failed. Please check your email and password.')
+
+    return render_template('adminLogin.html')
+
+# ADMIN DASHBOARD
+@app.route('/adminDashboard')
+def adminDashboard():
+    counts = count()
+    if counts is not None:
+        return render_template('adminDashboard.html',counts=counts)
+    else:
+        return render_template('adminDashboard.html',counts={})
+
+# COUNT ALL THE NUMBER OF INFOS IN DB
+@app.route('/count', methods=['GET'])
+def count():
+    try:
+        cursor.execute("SELECT COUNT(*) as userCount FROM user")
+        user_count = cursor.fetchone()['userCount']
+
+        cursor.execute("SELECT COUNT(*) as recipeCount FROM recipe")
+        recipe_count = cursor.fetchone()['recipeCount']
+
+        cursor.execute("SELECT COUNT(*) as breakfastCount FROM recipe WHERE category = 'Breakfast'")
+        breakfast_count = cursor.fetchone()['breakfastCount']
+
+        cursor.execute("SELECT COUNT(*) as lunchCount FROM recipe WHERE category = 'Lunch'")
+        lunch_count = cursor.fetchone()['lunchCount']
+
+        cursor.execute("SELECT COUNT(*) as dinnerCount FROM recipe WHERE category = 'Dinner'")
+        dinner_count = cursor.fetchone()['dinnerCount']
+
+        cursor.execute("SELECT COUNT(*) as dessertCount FROM recipe WHERE category = 'Dessert'")
+        dessert_count = cursor.fetchone()['dessertCount']
+
+        cursor.execute("SELECT COUNT(*) as appetizerCount FROM recipe WHERE category = 'Appetizer'")
+        appetizer_count = cursor.fetchone()['appetizerCount']
+
+        cursor.execute("SELECT COUNT(*) as drinksCount FROM recipe WHERE category = 'Drinks'")
+        drinks_count = cursor.fetchone()['drinksCount']
+
+        print("Counts:")
+        print("User Count:", user_count)
+        print("Recipe Count:", recipe_count)
+        print("Breakfast Count:", breakfast_count)
+        print("Lunch Count:", lunch_count)
+        print("Dinner Count:", dinner_count)
+        print("Dessert Count:", dessert_count)
+        print("Appetizer Count:", appetizer_count)
+        print("Drinks Count:", drinks_count)
+
+        return {
+            'userCount': user_count,
+            'recipeCount': recipe_count,
+            'breakfastCount': breakfast_count,
+            'lunchCount': lunch_count,
+            'dinnerCount': dinner_count,
+            'dessertCount': dessert_count,
+            'appetizerCount': appetizer_count,
+            'drinksCount': drinks_count
+        }
+
+    except Exception as e:
+        print(f"Error counting records: {e}")
+        return jsonify({'error': 'Error fetching counts'}), 500
+
+    
+# ADMIN RECIPE CAN ADD AND DELETE
+@app.route('/adminRecipe')
+def adminRecipe():
+    cursor.execute("SELECT recipeTitle,category FROM recipe")
+    recipes = cursor.fetchall()
+    return render_template('adminRecipe.html',recipes=recipes)
+
+# ADMIN ADD RECIPE
+@app.route('/adminAdd', methods=['GET','POST'])
+def adminAdd():
+    if request.method == 'POST':
+        title = request.form['title']
+        img = request.form['image']
+        description = request.form['desc']
+        ingredients = request.form['ingredients']
+        instruction = request.form['instruction']
+        serving = int(request.form['serving'])
+        category = request.form['category']
+            
+        cursor.execute("INSERT INTO recipe (recipeTitle, recipeImg, description, ingredients, instruction, serving, category) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                       (title, img, description, ingredients, instruction, serving, category))
+        db_connection.commit()
+        
+        return redirect(url_for('adminRecipe'))
+    return render_template('adminRecipe.html')
+
+# ADMIN DELETE RECIPE
+@app.route('/adminRemove',methods=['GET','POST'])
+def adminRemove():
+    if request.method == 'POST':
+        title = request.form['titleToDelete']
+        category = request.form['categoryToDelete']
+        
+        cursor.execute("DELETE FROM recipe WHERE recipeTitle = %s AND category = %s",(title,category))
+        db_connection.commit()
+        
+        return redirect(url_for('adminRecipe'))
+    return render_template('adminRecipe.html')
 
 # LOG OUT
 @app.route('/logout')
@@ -126,7 +246,7 @@ def subscribe():
         
     return render_template('home.html')
 
-# MENU
+# ALL MENU
 @app.route('/menu', methods=['GET', 'POST'])
 def menu():
     cursor.execute("SELECT recipeTitle, recipeImg FROM recipe")
@@ -138,9 +258,20 @@ def menu():
 
     return render_template('menu.html', recipes=recipes)
 
-# BREAKFAST MENU
 
+    
+# CATEGORY MENU
+@app.route('/category/<string:category>', methods=['GET','POST'])
+def category(category):
+    cursor.execute("SELECT recipeTitle, recipeImg FROM recipe WHERE category = %s",(category,))
+    category_recipes = cursor.fetchall()
+    
+    for recipe in category_recipes:
+        recipe['recipeImg'] = base64.b64encode(recipe['recipeImg']).decode('utf-8')
+    
+    return render_template('category.html', category=category, recipes=category_recipes)
 
+    
 # RECIPE DETAILS
 @app.route('/recipe/<string:recipe_title>')
 def details(recipe_title):
@@ -156,6 +287,24 @@ def details(recipe_title):
     else:
         return render_template('details.html', details=[])
 
+# BOOKMARK EMAIL
+@app.route('/bookmark', methods=['POST'])
+def bookmark_recipe():
+    if 'email' in session:
+        email = session['email']
+        recipe_title = request.form.get('recipeTitle')
+        recipe_ingredients = request.form.get('ingredients')
+        recipe_instruction = request.form.get('instruction')
+
+        # Retrieve other recipe details as needed
+
+        # Send email with recipe details
+        msg_recipe = Message(f'Bookmark - {recipe_title}', recipients=[email])
+        msg_recipe.body = f"Dear Foodie,\n\nYou've bookmarked the recipe '{recipe_title}'.\n\nIngredients:\n'{recipe_ingredients}\n\nInstruction:\n{recipe_instruction}\n\nHappy cooking!\n\nBest Regards,\nThe FoodieLand Team"
+
+        mail.send(msg_recipe)
+        
+        return render_template('details.html')
 
 
 

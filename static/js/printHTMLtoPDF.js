@@ -22,17 +22,13 @@ function copyURL() {
     alert('URL copied to clipboard: ' + getURL);
 }
 
-// add to favorite
 function addBookmark() {
-    const icon = document.getElementById('heartIcon');
-
-    if (icon.classList.contains('fa-regular')) {
-        icon.classList.remove('fa-regular');
-        icon.classList.add('fa-solid');
-        alert('You added to bookmark');
-    } else {
-        icon.classList.remove('fa-solid');
-        icon.classList.add('fa-regular');
-        alert('You remove from bookmark')
-    }
+    const form = document.getElementById('bookmarkForm');
+    form.submit();
+    alert('Recipe already sent to your email')
 }
+
+
+
+
+

@@ -131,105 +131,46 @@ button {
 
 /* code starts here */
 main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
     padding-top: 8rem;
 }
 
 .recipe-container {
-    width: 90%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
-
-/* db title */
-.recipe-title h1{
-    font-size: 2rem;
-}
-
-/* db serving */
-.serving-share-container {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    margin: 3rem 0;
-}
-
-.print-share-container{
-    margin-left: 12rem;
-    text-align: right;
-    display: grid;
-    grid-template-columns: 1.5fr 0.5fr;
-}
-
-.button-class {
-    text-align: right;
-}
-
-.print-share-container form {
-    text-align: left;
-}
-
-.print-share-container button {
-    padding: 1rem;
-    margin: 0 1rem;
-    border: 0.5px solid #000000;
-    border-radius: 50%;
-}
-
-.serving-container .span1{
-    font-size: 1.5rem;
-    position: absolute;
-    top: 33%;
-    left: 9%;
-}
-
-.serving-container .span2 {
-    font-size: 1.5rem;
-    position: absolute;
-    top: 39%;
-    left: 9%;
-}
-
-.serving-container .img1 {
-    width: 40px;
-    height: 40px;
-}
-
-.serving-container .img2 {
-    width: 40px;
-    height: 30px;
-}
-/* recipe img */
-.recipe-img {
-    margin-top: 2rem;
-    width: 100%;
+.recipe-group {
+    border-radius: 20px;
     text-align: center;
+    width: 30%;
+    margin: 1rem 0 5rem 0;
+    overflow: hidden;
+    padding: 1rem 2rem 5rem 2rem;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    background-color: rgba(255, 255, 255, 0.25);
 }
 
-.recipe-img img{
-    width: 50%;
-    height: 400px;
+.recipe-img {
+    height: 200px;
+    overflow: hidden;
 }
 
-/* recipe description */
-.recipe-desc {
-    margin: 2rem 0 5rem 0;
+.recipe-img img {
+    width: 100%;
+    border-radius: 20px;
+
 }
 
-/* recipe ingredients */
-.recipe-ingredients {
-    height: auto;
-    margin-bottom: 4rem;
+.recipe-group h5,
+button {
+    margin-top: 1rem;
 }
 
-.recipe-ingredients ul,li,
-.recipe-instruction {
-    margin: 1rem 0 0 0.5rem;
-}
-
-.recipe-instruction {
-    margin-bottom: 5rem;
+.recipe-group button {
+    background-color: rgba(146, 202, 215, 1);
+    padding: 1rem 2rem;
+    border-radius: 16px;
 }
 
 /* inbox */
