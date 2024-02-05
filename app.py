@@ -186,7 +186,17 @@ def adminAdd():
     return render_template('adminRecipe.html')
 
 # ADMIN DELETE RECIPE
-
+@app.route('/adminRemove',methods=['GET','POST'])
+def adminRemove():
+    if request.method == 'POST':
+        title = request.form['titleToDelete']
+        category = request.form['categoryToDelete']
+        
+        cursor.execute("DELETE FROM recipe WHERE recipeTitle = %s AND category = %s",(title,category))
+        db_connection.commit()
+        
+        return redirect(url_for('adminRecipe'))
+    return render_template('adminRecipe.html')
 
 # LOG OUT
 @app.route('/logout')
