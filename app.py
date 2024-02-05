@@ -159,6 +159,34 @@ def count():
         return jsonify({'error': 'Error fetching counts'}), 500
 
     
+# ADMIN RECIPE CAN ADD AND DELETE
+@app.route('/adminRecipe')
+def adminRecipe():
+    cursor.execute("SELECT recipeTitle,category FROM recipe")
+    recipes = cursor.fetchall()
+    return render_template('adminRecipe.html',recipes=recipes)
+
+# ADMIN ADD RECIPE
+@app.route('/adminAdd', methods=['GET','POST'])
+def adminAdd():
+    if request.method == 'POST':
+        title = request.form['title']
+        img = request.form['image']
+        description = request.form['desc']
+        ingredients = request.form['ingredients']
+        instruction = request.form['instruction']
+        serving = int(request.form['serving'])
+        category = request.form['category']
+            
+        cursor.execute("INSERT INTO recipe (recipeTitle, recipeImg, description, ingredients, instruction, serving, category) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                       (title, img, description, ingredients, instruction, serving, category))
+        db_connection.commit()
+        
+        return redirect(url_for('adminRecipe'))
+    return render_template('adminRecipe.html')
+
+# ADMIN DELETE RECIPE
+
 
 # LOG OUT
 @app.route('/logout')
