@@ -78,6 +78,88 @@ def login():
 
     return render_template('logIn.html')
 
+# ADMIN LOG IN
+@app.route('/adminLogin', methods=['GET','POST'])
+def adminLogin():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+
+        cursor.execute("SELECT * FROM admin WHERE email=%s AND password=%s", (email, password))
+        user = cursor.fetchone()
+
+        if user:
+            session['email'] = email
+            return redirect(url_for('adminDashboard'))
+        else:
+            return render_template('adminLogin.html', error='Login failed. Please check your email and password.')
+
+    return render_template('adminLogin.html')
+
+# ADMIN DASHBOARD
+@app.route('/adminDashboard')
+def adminDashboard():
+    counts = count()
+    if counts is not None:
+        return render_template('adminDashboard.html',counts=counts)
+    else:
+        return render_template('adminDashboard.html',counts={})
+
+# COUNT ALL THE NUMBER OF INFOS IN DB
+@app.route('/count', methods=['GET'])
+def count():
+    try:
+        cursor.execute("SELECT COUNT(*) as userCount FROM user")
+        user_count = cursor.fetchone()['userCount']
+
+        cursor.execute("SELECT COUNT(*) as recipeCount FROM recipe")
+        recipe_count = cursor.fetchone()['recipeCount']
+
+        cursor.execute("SELECT COUNT(*) as breakfastCount FROM recipe WHERE category = 'Breakfast'")
+        breakfast_count = cursor.fetchone()['breakfastCount']
+
+        cursor.execute("SELECT COUNT(*) as lunchCount FROM recipe WHERE category = 'Lunch'")
+        lunch_count = cursor.fetchone()['lunchCount']
+
+        cursor.execute("SELECT COUNT(*) as dinnerCount FROM recipe WHERE category = 'Dinner'")
+        dinner_count = cursor.fetchone()['dinnerCount']
+
+        cursor.execute("SELECT COUNT(*) as dessertCount FROM recipe WHERE category = 'Dessert'")
+        dessert_count = cursor.fetchone()['dessertCount']
+
+        cursor.execute("SELECT COUNT(*) as appetizerCount FROM recipe WHERE category = 'Appetizer'")
+        appetizer_count = cursor.fetchone()['appetizerCount']
+
+        cursor.execute("SELECT COUNT(*) as drinksCount FROM recipe WHERE category = 'Drinks'")
+        drinks_count = cursor.fetchone()['drinksCount']
+
+        print("Counts:")
+        print("User Count:", user_count)
+        print("Recipe Count:", recipe_count)
+        print("Breakfast Count:", breakfast_count)
+        print("Lunch Count:", lunch_count)
+        print("Dinner Count:", dinner_count)
+        print("Dessert Count:", dessert_count)
+        print("Appetizer Count:", appetizer_count)
+        print("Drinks Count:", drinks_count)
+
+        return {
+            'userCount': user_count,
+            'recipeCount': recipe_count,
+            'breakfastCount': breakfast_count,
+            'lunchCount': lunch_count,
+            'dinnerCount': dinner_count,
+            'dessertCount': dessert_count,
+            'appetizerCount': appetizer_count,
+            'drinksCount': drinks_count
+        }
+
+    except Exception as e:
+        print(f"Error counting records: {e}")
+        return jsonify({'error': 'Error fetching counts'}), 500
+
+    
+
 # LOG OUT
 @app.route('/logout')
 def logout():

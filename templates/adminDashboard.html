@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adminDashboard.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/mainlogo.png') }}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css
+                "
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>ADMIN | Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <div class="dashboard">
+            <h2>FoodieLand</h2>
+            <a href="{{url_for('adminDashboard')}}"><img class="link1" src="{{url_for('static', filename='img/dashboard.svg')}}" alt="dashboard" >Dashboard</a>
+            <a href="#"><img class="link2"  src="{{url_for('static', filename='img/scooter.png')}}" alt="dashboard" >Recipe</a>
+        </div>
+        <div class="panel">
+            <a href="{{url_for('logout')}}"><i class="fa-solid fa-right-from-bracket"></i></a>
+            <div class="container-1">
+                <h2>Welcome to a <br> World of Flavors!</h2>
+                <span>Indulge in a World of Flavors with Foodieland, where every bite is a <br> culinary adventure!</span>
+                <img src="{{url_for('static',filename='img/adminbg.png')}}" alt="">
+            </div>
+            <div class="group-dashboard">
+                <div class="group">
+                    <img src="{{url_for('static',filename='img/img.png')}}"> <br>
+                    <span id="userCount"></span>
+                    <h2>User</h2>
+                </div>
+                <div class="group">
+                    <img src="{{url_for('static',filename='img/recipe.png')}}"> <br>
+                    <span id="recipeCount"></span>
+                    <h2>OverAll Recipes</h2>
+                </div>
+                <div class="group">
+                    <img src="{{url_for('static',filename='img/Fried eggs.png')}}"> <br>
+                    <span id="breakfastCount"></span>
+                    <h2>Breakfast</h2>
+                </div>
+                <div class="group">
+                    <img src="{{url_for('static',filename='img/lunch.png')}}"> <br>
+                    <span id="lunchCount"></span>
+                    <h2>Lunch</h2>
+                </div>
+                <div class="group">
+                    <img src="{{url_for('static',filename='img/dinner.png')}}"> <br>
+                    <span id="dinnerCount"></span>
+                    <h2>Dinner</h2>
+                </div>
+                <div class="group">
+                    <img src="{{url_for('static',filename='img/chocolate.png')}}"> <br>
+                    <span id="dessertCount"></span>
+                    <h2>Dessert</h2>
+                </div>
+                <div class="group">
+                    <img src="{{url_for('static',filename='img/appetizer.png')}}"> <br>
+                    <span id="appetizerCount"></span>
+                    <h2>Appetizer</h2>
+                </div>
+                <div class="group">
+                    <img src="{{url_for('static',filename='img/cofee 1.png')}}"> <br>
+                    <span id="drinksCount"></span>
+                    <h2>Drinks</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+            fetch('/count')
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        document.getElementById('userCount').textContent = data.userCount || '';
+                        document.getElementById('recipeCount').textContent = data.recipeCount || '';
+                        document.getElementById('breakfastCount').textContent = data.breakfastCount || '';
+                        document.getElementById('lunchCount').textContent = data.lunchCount || '';
+                        document.getElementById('dinnerCount').textContent = data.dinnerCount || '';
+                        document.getElementById('dessertCount').textContent = data.dessertCount || '';
+                        document.getElementById('appetizerCount').textContent = data.appetizerCount || '';
+                        document.getElementById('drinksCount').textContent = data.drinksCount || '';
+                    } else {
+                        console.error('Invalid data structure received');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching counts:', error);
+                });
+        });
+
+
+</script>
+</html>
